@@ -2,6 +2,17 @@ import { WeatherData, Coordinates, DailyForecast } from "../types/weather";
 
 // Open-Meteo API - completely free, no API key required
 const BASE_URL = "https://api.open-meteo.com/v1/forecast";
+const GEOCODING_SEARCH_URL = "https://geocoding-api.open-meteo.com/v1/search";
+
+export interface LocationResult {
+  id: number;
+  name: string;
+  latitude: number;
+  longitude: number;
+  country: string;
+  admin1?: string;
+  admin2?: string;
+}
 
 // WMO Weather interpretation codes
 const getWeatherCondition = (weatherCode: number): { main: string; description: string } => {
@@ -22,7 +33,7 @@ export const fetchWeatherData = async (
 ): Promise<WeatherData> => {
   const { lat, lon } = coordinates;
 
-  const url = `${BASE_URL}?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max,windspeed_10m_max,winddirection_10m_dominant&timezone=auto&forecast_days=7`;
+  const url = `${BASE_URL}?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max,windspeed_10m_max,winddirection_10m_dominant&timezone=auto&temperature_unit=fahrenheit&windspeed_unit=mph&forecast_days=7`;
 
   try {
     const response = await fetch(url);
@@ -93,38 +104,23 @@ export const fetchWeatherData = async (
   }
 };
 
-export const getUserLocation = (): Promise<Coordinates> => {
-  return new Promise((resolve, reject) => {
-    if (!navigator.geolocation) {
-      reject(new Error("Geolocation is not supported by your browser"));
-      return;
+export const searchLocations = async (query: string): Promise<LocationResult[]> => {
+  if (!query || query.length < 2) {
+    return [];
+  }
+
+  const url = `${GEOCODING_SEARCH_URL}?name=${encodeURIComponent(query)}&count=5&language=en&format=json`;
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      return [];
     }
 
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        resolve({
-          lat: position.coords.latitude,
-          lon: position.coords.longitude,
-        });
-      },
-      (error) => {
-        let errorMessage = "Failed to get your location";
-
-        switch (error.code) {
-          case error.PERMISSION_DENIED:
-            errorMessage =
-              "Location permission denied. Please enable location access.";
-            break;
-          case error.POSITION_UNAVAILABLE:
-            errorMessage = "Location information is unavailable.";
-            break;
-          case error.TIMEOUT:
-            errorMessage = "Location request timed out.";
-            break;
-        }
-
-        reject(new Error(errorMessage));
-      }
-    );
-  });
+    const data = await response.json();
+    return data.results || [];
+  } catch (error) {
+    console.error("Failed to search locations:", error);
+    return [];
+  }
 };

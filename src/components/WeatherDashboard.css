@@ -7,7 +7,7 @@
 
 .dashboard-header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
   animation: fadeIn 0.8s ease;
 }
 
@@ -49,10 +49,74 @@
 .dashboard-subtitle {
   font-size: 1.2rem;
   color: rgba(255, 255, 255, 0.6);
-  margin: 0;
+  margin: 0 0 32px 0;
   font-weight: 300;
   letter-spacing: 2px;
   text-transform: uppercase;
+}
+
+.dashboard-loading,
+.dashboard-error,
+.dashboard-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  gap: 20px;
+}
+
+.dashboard-loading .loader {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #667eea;
+  border-right-color: #764ba2;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+.dashboard-error .error-icon {
+  font-size: 4rem;
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+.error-message {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin: 0;
+}
+
+.empty-text {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  margin: 0;
 }
 
 .forecast-grid {

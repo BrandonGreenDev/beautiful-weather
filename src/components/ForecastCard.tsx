@@ -52,7 +52,7 @@ const ForecastCard = ({ forecast, index }: ForecastCardProps) => {
             </div>
             <div className="detail-item">
               <span className="detail-icon">💨</span>
-              <span>{Math.round(forecast.speed)} km/h</span>
+              <span>{Math.round(forecast.speed)} mph</span>
             </div>
             <div className="detail-item">
               <span className="detail-icon">☔</span>
