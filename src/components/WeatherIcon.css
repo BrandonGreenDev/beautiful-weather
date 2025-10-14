@@ -1,0 +1,112 @@
+.weather-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.weather-icon {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+  transition: transform 0.3s ease;
+}
+
+.weather-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Sun animation */
+.sun .sun-rays {
+  animation: rotateSun 20s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes rotateSun {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Cloud animation */
+.cloud .cloud-shape {
+  animation: floatCloud 3s ease-in-out infinite;
+}
+
+@keyframes floatCloud {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+/* Rain animation */
+.rain-drops {
+  animation: falling 1s ease-in infinite;
+}
+
+@keyframes falling {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+}
+
+/* Lightning animation */
+.lightning {
+  animation: flash 2s ease-in-out infinite;
+}
+
+@keyframes flash {
+  0%, 100% {
+    opacity: 0;
+  }
+  45%, 55% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Snow animation */
+.snowflakes {
+  animation: snowfall 3s ease-in-out infinite;
+}
+
+@keyframes snowfall {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(3px);
+    opacity: 0.7;
+  }
+}
+
+/* Mist animation */
+.mist-lines {
+  animation: mistFloat 4s ease-in-out infinite;
+}
+
+@keyframes mistFloat {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}

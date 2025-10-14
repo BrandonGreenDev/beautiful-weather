@@ -1,0 +1,33 @@
+{
+  "name": "beautiful-weather",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Modern weather dashboard with sleek design",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrandonGreenDev/beautiful-weather.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BrandonGreenDev/beautiful-weather/issues"
+  },
+  "homepage": "https://github.com/BrandonGreenDev/beautiful-weather#readme",
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.0.4",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "vite": "^7.1.10"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "typescript": "^5.9.3"
+  }
+}
